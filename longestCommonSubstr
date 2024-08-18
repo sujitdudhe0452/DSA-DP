@@ -1,0 +1,28 @@
+  int find(int n , int m ,string &x , string &y , int &ans,vector<vector<int>>&dp)
+  {
+      if(n==0  || m==0)
+      return 0 ;
+      if(dp[n][m]!=-1)
+      return dp[n][m];
+      int len=0;
+      if(x[n-1]==y[m-1])
+      {
+          len = 1+find(n-1,m-1,x,y,ans,dp);
+          ans=max(ans,len);
+      }
+      
+      find(n-1,m,x,y,ans,dp);
+      find(n,m-1,x,y,ans,dp);
+      
+    return dp[n][m]=len;
+  }
+    int longestCommonSubstr(string str1, string str2) {
+        // your code here
+        int ans=0;
+        int n = str1.size();
+        int m=str2.size();
+        vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
+      
+        find(n,m,str1,str2,ans,dp);
+          return  ans ;
+    }
